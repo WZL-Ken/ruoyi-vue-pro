@@ -30,6 +30,8 @@ public class ProjectReactor {
     private static final String PACKAGE_NAME = "cn.iocoder.yudao";
     private static final String TITLE = "芋道管理系统";
 
+    private static final String AUTHOR_1 = "@author 芋道源码";
+
     /**
      * 白名单文件，不进行重写，避免出问题
      */
@@ -47,6 +49,7 @@ public class ProjectReactor {
         String artifactIdNew = "star";
         String packageNameNew = "cn.start.pp";
         String titleNew = "土豆管理系统";
+        String author_1_new = "@author 芋道源码";
         String projectBaseDirNew = projectBaseDir + "-new"; // 一键改名后，“新”项目所在的目录
         log.info("[main][检测新项目目录 ({})是否存在]", projectBaseDirNew);
         if (FileUtil.exist(projectBaseDirNew)) {
@@ -73,7 +76,7 @@ public class ProjectReactor {
                 return;
             }
             // 如果非白名单的文件类型，重写内容，在生成文件
-            String content = replaceFileContent(file, groupIdNew, artifactIdNew, packageNameNew, titleNew);
+            String content = replaceFileContent(file, groupIdNew, artifactIdNew, packageNameNew, titleNew, author_1_new);
             writeFile(file, content, projectBaseDir, projectBaseDirNew, packageNameNew, artifactIdNew);
         });
         log.info("[main][重写完成]共耗时：{} 秒", (System.currentTimeMillis() - start) / 1000);
@@ -104,7 +107,7 @@ public class ProjectReactor {
 
     private static String replaceFileContent(File file, String groupIdNew,
                                              String artifactIdNew, String packageNameNew,
-                                             String titleNew) {
+                                             String titleNew, String author_1_new) {
         String content = FileUtil.readString(file, StandardCharsets.UTF_8);
         // 如果是白名单的文件类型，不进行重写
         String fileType = getFileType(file);
@@ -116,7 +119,8 @@ public class ProjectReactor {
                 .replaceAll(PACKAGE_NAME, packageNameNew)
                 .replaceAll(ARTIFACT_ID, artifactIdNew) // 必须放在最后替换，因为 ARTIFACT_ID 太短！
                 .replaceAll(StrUtil.upperFirst(ARTIFACT_ID), StrUtil.upperFirst(artifactIdNew))
-                .replaceAll(TITLE, titleNew);
+                .replaceAll(TITLE, titleNew)
+                .replace(AUTHOR_1, author_1_new);
     }
 
     private static void writeFile(File file, String fileContent, String projectBaseDir,
