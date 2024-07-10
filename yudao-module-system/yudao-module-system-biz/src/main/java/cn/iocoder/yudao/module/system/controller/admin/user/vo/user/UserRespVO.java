@@ -72,4 +72,11 @@ public class UserRespVO{
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED, example = "时间戳格式")
     private LocalDateTime createTime;
 
+    @Schema(description = "账号类型(0长期 1临时)", example = "1")
+    private Integer accountType;
+
+    @Schema(description = "身份证号码", example = "yudao")
+    private String identityCardNumber;
+
+
 }

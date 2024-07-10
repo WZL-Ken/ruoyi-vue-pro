@@ -35,4 +35,12 @@ public class UserPageReqVO extends PageParam {
     @Schema(description = "部门编号，同时筛选子部门", example = "1024")
     private Long deptId;
 
+    @Schema(description = "账号类型(0长期 1临时)", example = "1")
+    private Integer accountType;
+
+    @Schema(description = "身份证号码，模糊匹配", example = "yudao")
+    private String identityCardNumber;
+
+
+
 }

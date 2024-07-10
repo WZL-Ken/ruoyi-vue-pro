@@ -43,4 +43,13 @@ public class UserImportExcelVO {
     @DictFormat(DictTypeConstants.COMMON_STATUS)
     private Integer status;
 
+    @ExcelProperty(value = "账号类型", converter = DictConvert.class)
+    @DictFormat(DictTypeConstants.ACCOUNT_TYPE)
+    private Integer accountType;
+
+    @ExcelProperty("身份证号码")
+    private String identityCardNumber;
+
+
+
 }
